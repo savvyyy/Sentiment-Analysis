@@ -19,6 +19,7 @@ git clone https://github.com/savvyyy/Sentiment-Analysis.git
 2. Run ./setup.sh
 ```
 ## Usage
+Change .env.example to .env
 ```
 Run python main.py 
 ```
