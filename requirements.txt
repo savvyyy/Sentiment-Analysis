@@ -4,11 +4,11 @@ flask_restful
 textblob
 pandas
 numpy
-seaborn
-matplotlib
-wordcloud
+# seaborn
+# matplotlib
+# wordcloud
 nltk
 stop-words
-spacy
-vaderSentiment
+# spacy
+# vaderSentiment
 python-dotenv
