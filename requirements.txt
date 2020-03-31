@@ -1,0 +1,14 @@
+tweepy
+Flask
+flask_restful
+textblob
+pandas
+numpy
+seaborn
+matplotlib
+wordcloud
+nltk
+stop-words
+spacy
+vaderSentiment
+python-dotenv
