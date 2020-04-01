@@ -35,10 +35,10 @@ class IntentSentimentAnalysis(Resource):
 
     def get(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('text', type=str, required=True)
+        parser.add_argument('hashtag', type=str, required=True)
         args = parser.parse_args()
 
-        return intentPrediction(args.text), 200
+        return intentPrediction('#'+args.hashtag), 200
 
 
 api.add_resource(SentimentAnalysisResult, '/getSentiment')
