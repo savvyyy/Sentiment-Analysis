@@ -28,4 +28,9 @@ def absa(hashTagSubject):
     data['Sentiment'] = data.apply(sentimentData, axis=1)
     data["Aspects"] = data["text"].apply(getAspect)
 
-    return data
+    # print('dataaa',data)
+    aspect_list = []
+    for index, rows in data.iterrows():
+        row_list = [rows.text, rows.Polarity, rows.Sentiment, rows.Aspects]
+        aspect_list.append(row_list)
+    return aspect_list

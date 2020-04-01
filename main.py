@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Api, Resource, reqparse
 from sentiment import sentimentAnalysis
 from absa import absa
+from intent import intentPrediction
 
 app = Flask(__name__)
 api = Api(app)
@@ -33,11 +34,16 @@ class IntentSentimentAnalysis(Resource):
         pass
 
     def get(self):
-        pass
+        parser = reqparse.RequestParser()
+        parser.add_argument('text', type=str, required=True)
+        args = parser.parse_args()
+
+        return intentPrediction(args.text), 200
 
 
 api.add_resource(SentimentAnalysisResult, '/getSentiment')
 api.add_resource(AspectSentimentAnalysis, '/absa')
+api.add_resource(IntentSentimentAnalysis, '/intent')
 
 if __name__ == "__main__":
     app.run(debug=True)
