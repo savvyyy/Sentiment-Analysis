@@ -14,6 +14,7 @@ def intentPrediction(hashTagSubject):
         prediction.append(predict)
     for pred in prediction:
          final_data.append(get_final_output(pred, unique_intent))
+    # print('final_data', final_data)
     intentData = []
     for i in range(len(tweetText)):
         intentData.append({
