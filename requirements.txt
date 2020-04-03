@@ -13,3 +13,4 @@ stop-words
 # vaderSentiment
 python-dotenv
 tensorflow
+flask-cors

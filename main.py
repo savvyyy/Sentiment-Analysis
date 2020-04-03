@@ -4,8 +4,10 @@ from sentiment import sentimentAnalysis
 from absa import absa
 from intent import intentPrediction
 from groupTweets import createGroup
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 api = Api(app)
 
 class SentimentAnalysisResult(Resource):
@@ -57,6 +59,7 @@ api.add_resource(SentimentAnalysisResult, '/getSentiment')
 api.add_resource(AspectSentimentAnalysis, '/absa')
 api.add_resource(IntentSentimentAnalysis, '/intent')
 api.add_resource(PlotGraphApi, '/graph')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
