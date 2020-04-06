@@ -1,7 +1,7 @@
 import re
 import en_core_web_sm
 import tweepy
-import os
+import os, csv
 from textblob import TextBlob
 import pandas as pd
 import numpy as np
@@ -24,10 +24,26 @@ def getTwitterData(hashTagSubject):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
-    public_tweets = api.search(hashTagSubject, count=5)
+    public_tweets = api.search(hashTagSubject, count=15)
 
-    return public_tweets
+    print('tweets', public_tweets)
 
+    tweetText = []
+    createdTweet = []
+    for tweet in public_tweets:
+        tweetText.append(tweet.text)
+        createdTweet.append(tweet.created_at.strftime('%Y-%m-%d %H:%M:%S:%f'))
+    
+    filename = hashTagSubject + '.csv'
+    with open(filename, 'w',newline="") as file_writer:
+        fields=["id","tweet", "created_at"]
+        writer=csv.DictWriter(file_writer,fieldnames=fields)
+        writer.writeheader()
+        for i in range(0, len(tweetText)):
+            writer.writerow({"id": i,"tweet": tweetText[i], "created_at": createdTweet[i]})
+
+    return os.path.dirname(os.path.abspath(filename))
+    
 def getPolarity(text):
     textAnalysis = TextBlob(text)
     polarity = textAnalysis.sentiment.polarity
