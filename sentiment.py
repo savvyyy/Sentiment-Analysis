@@ -3,7 +3,7 @@ import datetime
 import os.path
 from os import path
 import pandas as pd
-from functions import getPolarity, getTwitterData
+from functions import calculatePolarity, getTwitterData
 
 # cwd = os.getcwd()
 # print(cwd)
@@ -15,21 +15,17 @@ def sentimentAnalysis(hashTagSubject):
         print('hai')
         public_tweets =  pd.read_csv(os.path.realpath(public_tweets_path))
         polarity= []
-        # subjectivity = [] 
         totalCount = 0
         tweetText = []
-        for tweet in public_tweets['tweet']:
+        for tweet in public_tweets['tweet_without_url']:
             totalCount = totalCount+1
             tweetText.append(tweet)
-            data = getPolarity(tweet)
+            data = calculatePolarity(tweet)
             polarity.append(data)
-            # subjectivity.append(data['subjectivity'])
-    
 
         if(totalCount > 0):
             Sum = sum(polarity)
             average = Sum/len(polarity)
-            # print('average', average)
             if(average > 0 and average < 0.5):
                 # print("happy")
                 return {
@@ -72,21 +68,18 @@ def sentimentAnalysis(hashTagSubject):
         public_tweets_path = public_tweets_file + '/' + hashTagSubject + '.csv'
         public_tweets =  pd.read_csv(os.path.realpath(public_tweets_path))
         polarity= []
-        # subjectivity = [] 
         totalCount = 0
         tweetText = []
-        for tweet in public_tweets['tweet']:
+        for tweet in public_tweets['tweet_without_url']:
             totalCount = totalCount+1
             tweetText.append(tweet)
-            data = getPolarity(tweet)
+            data = calculatePolarity(tweet)
             polarity.append(data)
-            # subjectivity.append(data['subjectivity'])
     
 
         if(totalCount > 0):
             Sum = sum(polarity)
             average = Sum/len(polarity)
-            # print('average', average)
             if(average > 0 and average < 0.5):
                 # print("happy")
                 return {

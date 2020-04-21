@@ -10,7 +10,8 @@ numpy
 nltk
 stop-words
 # spacy
-# vaderSentiment
+vaderSentiment
 python-dotenv
 tensorflow
 flask-cors
+twython

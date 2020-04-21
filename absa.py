@@ -13,10 +13,10 @@ def absa(hashTagSubject):
         
         data = pd.read_csv(os.path.realpath(public_tweets_path))
         data["tweet"] = data["tweet"].astype(str)
-        data["tweetclean"] = data["tweet"].apply(lambda text: remove_urls(text))
-        data["Polarity"] = data["tweet"].apply(getPolarity)
+        data["cleaned_tweet"] = data["cleaned_tweet"]
+        data["Polarity"] = data["tweet_without_url"].apply(getPolarity)
         data['Sentiment'] = data.apply(sentimentData, axis=1)
-        data["Aspects"] = data["tweet"].apply(getAspect)
+        data["Aspects"] = data["cleaned_tweet"].apply(getAspect)
         
 
         aspect_list = data.to_dict(orient='records')
@@ -26,45 +26,13 @@ def absa(hashTagSubject):
         print('nai hai')
         public_tweets_file = getTwitterData(hashTagSubject)
         public_tweets_path = public_tweets_file + '/' + hashTagSubject + '.csv'
-        # public_tweets =  pd.read_csv(os.path.realpath(public_tweets_path))
-
+        
         data = pd.read_csv(os.path.realpath(public_tweets_path))
         data["tweet"] = data["tweet"].astype(str)
-        data["tweetclean"] = data["tweet"].apply(lambda text: remove_urls(text))
-        data["Polarity"] = data["tweet"].apply(getPolarity)
+        data["cleaned_tweet"] = data["cleaned_tweet"]
+        data["Polarity"] = data["tweet_without_url"].apply(getPolarity)
         data['Sentiment'] = data.apply(sentimentData, axis=1)
-        data["Aspects"] = data["tweet"].apply(getAspect)
+        data["Aspects"] = data["tweet_without_url"].apply(getAspect)
         
-
         aspect_list = data.to_dict(orient='records')
         return aspect_list
-        # tweetText = []
-        # for tweet in public_tweets['tweet']:
-        #     tweetText.append(tweet.text)
-
-    # filename = hashTagSubject + str(datetime.datetime.now()) + '.csv'
-
-
-    # with open(filename, 'w',newline="") as file_writer:
-    #     fields=["id","tweet"]
-    #     writer=csv.DictWriter(file_writer,fieldnames=fields)
-    #     writer.writeheader()
-    #     for i in range(0, len(tweetText)):
-    #         writer.writerow({"id": i,"tweet": tweetText[i]})
-
-    # data = pd.read_csv(os.path.realpath(filename))
-
-    
-    # data["tweet"] = data["tweet"].astype(str)
-    # data["tweetclean"] = data["tweet"].apply(lambda text: remove_urls(text))
-    # data["Polarity"] = data["tweet"].apply(getPolarity)
-    # data['Sentiment'] = data.apply(sentimentData, axis=1)
-    # data["Aspects"] = data["tweet"].apply(getAspect)
-
-    # # print('dataaa',data)
-    # aspect_list = data.to_dict(orient='records')
-    # # print('data', data)
-    # # for index, rows in data.iterrows():
-    # #     row_list = [rows.text, rows.Polarity, rows.Sentiment, rows.Aspects]
-    # #     aspect_list.append(row_list)
-    # return aspect_list
