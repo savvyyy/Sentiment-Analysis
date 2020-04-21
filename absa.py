@@ -3,7 +3,7 @@ import datetime, csv, os, json
 import os.path
 from os import path
 
-from functions import remove_urls, sentimentData, getAspect, getPolarity, getTwitterData
+from functions import remove_urls, sentimentData, getAspectTwitter, getPolarity, getTwitterData
 
 def absa(hashTagSubject):
     print('hashTagSubject', hashTagSubject)
@@ -16,7 +16,7 @@ def absa(hashTagSubject):
         data["cleaned_tweet"] = data["cleaned_tweet"]
         data["Polarity"] = data["tweet_without_url"].apply(getPolarity)
         data['Sentiment'] = data.apply(sentimentData, axis=1)
-        data["Aspects"] = data["cleaned_tweet"].apply(getAspect)
+        data["Aspects"] = data["cleaned_tweet"].apply(getAspectTwitter)
         
 
         aspect_list = data.to_dict(orient='records')

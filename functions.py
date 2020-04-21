@@ -136,7 +136,7 @@ def sentimentData(data):
         val = "Neutral"
     return val
 
-def getAspect(text):
+def getAspectTwitter(text):
     nlp = en_core_web_sm.load()
     aspects = []
     doc = nlp(text)
